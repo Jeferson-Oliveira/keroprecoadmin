@@ -7,7 +7,7 @@ package keroprecoadmin.dto;
 
 /**
  *
- * @author Jeferson
+ * @author Equipe Optimize
  */
 public class DtoUsuario {
     
@@ -15,6 +15,16 @@ public class DtoUsuario {
     private String nome;
     private String login;
     private String senha;
+
+    public DtoUsuario() {
+    }
+
+    public DtoUsuario(int idUsuario, String nome, String login, String senha) {
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

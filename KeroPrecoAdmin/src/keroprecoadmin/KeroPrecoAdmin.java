@@ -6,30 +6,19 @@
 package keroprecoadmin;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
  *
- * @author Jeferson
+ * @author Equipe Optimize
  */
 public class KeroPrecoAdmin extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/keroprecoadmin/views/LoginFXML.fxml"));
-     
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        
-        Tela.getInstancia().setTelaAtual(stage);
-        
-        stage.show();
+    public void start(Stage stage) throws Exception {       
+        AplicacaoUtil.getInstancia().setTelaAtual(stage);
+        AplicacaoUtil.getInstancia().irParaTela("LoginFXML.fxml");
     }
-    
-    
 
     /**
      * @param args the command line arguments

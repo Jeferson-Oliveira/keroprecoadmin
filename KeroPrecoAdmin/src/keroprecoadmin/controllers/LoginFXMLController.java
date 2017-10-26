@@ -7,26 +7,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import keroprecoadmin.KeroPrecoAdmin;
-import keroprecoadmin.Tela;
+import keroprecoadmin.AplicacaoUtil;
 import keroprecoadmin.dao.UsuarioDAO;
 import keroprecoadmin.dto.DtoUsuario;
 
 /**
  *
- * @author Equipe Optmize
+ * @author Equipe Optimize
  */
 public class LoginFXMLController implements Initializable {
-    
     
     private UsuarioDAO usuarioDAO = null;
     
@@ -57,13 +51,7 @@ public class LoginFXMLController implements Initializable {
     }
     
     public void irParaHome(){
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/keroprecoadmin/views/HomeFXML.fxml"));
-            Scene scene = new Scene(root);
-            Tela.getInstancia().getTelaAtual().setScene(scene);
-        }catch(Exception e) {
-            System.out.println("Ocorreu um erro ao carregar a tela");
-        }
+        AplicacaoUtil.getInstancia().irParaTela("HomeFXML.fxml");
     }
 
     @Override

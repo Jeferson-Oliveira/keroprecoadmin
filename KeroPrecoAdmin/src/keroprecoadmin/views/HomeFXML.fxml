@@ -47,5 +47,6 @@
             <Image url="@../../imagens/KeroPreco.png" />
          </image>
       </ImageView>
+      <Label fx:id="lblSaudacao" layoutX="286.0" layoutY="81.0" text="Olá " />
    </children>
 </AnchorPane>

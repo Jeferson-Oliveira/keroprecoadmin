@@ -7,21 +7,26 @@ package keroprecoadmin.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import keroprecoadmin.AplicacaoUtil;
 
 /**
  * FXML Controller class
  *
- * @author Jeferson
+ * @author Equipe Optimize
  */
 public class HomeFXMLController implements Initializable {
 
+    @FXML
+    private Label lblSaudacao;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        lblSaudacao.setText("Olá, " + AplicacaoUtil.getInstancia().getUsuarioLogado().getNome());
     }    
     
 }
