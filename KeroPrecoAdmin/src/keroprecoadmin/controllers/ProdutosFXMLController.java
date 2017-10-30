@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import keroprecoadmin.AplicacaoUtil;
 import keroprecoadmin.controllers.abstrato.Controller;
 import keroprecoadmin.dao.ProdutoDAO;
@@ -111,15 +112,38 @@ public class ProdutosFXMLController extends Controller implements Initializable 
     
     
     private void configurarTabela(){
-        
+        tbProdutos.setEditable(true);
+                
       // Adicionando Colunas na tabela de produtos
         TableColumn<DtoProduto , String > colunaNome = new TableColumn("Nome");
         colunaNome.setMinWidth(200);
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-       
+        colunaNome.setCellFactory(TextFieldTableCell.forTableColumn());
+        colunaNome.setOnEditCommit((cell) ->{
+            DtoProduto produtoEditado = ((DtoProduto) cell.getTableView().getItems().get(cell.getTablePosition().getRow()));
+            produtoEditado.setNome(cell.getNewValue());
+            
+            if(!produtoDAO.editar(produtoEditado)){
+             produtoEditado.setNome(cell.getOldValue());
+             AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível atualizar o registro!s");
+            }
+            
+        });
+        
         TableColumn<DtoProduto , String > colunaCategoria = new TableColumn("Categoria");
         colunaCategoria.setMinWidth(200);
         colunaCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colunaCategoria.setCellFactory(TextFieldTableCell.forTableColumn());
+        colunaCategoria.setOnEditCommit((cell) ->{
+            DtoProduto produtoEditado = ((DtoProduto) cell.getTableView().getItems().get(cell.getTablePosition().getRow()));
+            produtoEditado.setCategoria(cell.getNewValue());
+            
+            if(!produtoDAO.editar(produtoEditado)){
+             produtoEditado.setCategoria(cell.getOldValue());
+             AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível atualizar o registro!s");
+            }
+            
+        });
         tbProdutos.getColumns().addAll(colunaNome , colunaCategoria);
     }
     

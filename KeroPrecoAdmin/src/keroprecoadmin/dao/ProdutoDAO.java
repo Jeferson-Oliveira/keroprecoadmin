@@ -60,15 +60,6 @@ import keroprecoadmin.dto.DtoProduto;
                 ps.setInt(1,novoProduto.getIdProduto());
                 
                 removeuComSucesso = ps.executeUpdate() > 0;
-                
-//                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-//                    if (generatedKeys.next()) {
-//                        novoProduto.setIdProduto(generatedKeys.getInt(1));
-//                    }
-//                    else {
-//                        throw new SQLException("Erro ao Inserir Produto.");
-//                    }
-//                }
                 super.destroyConnection();
 
             } catch (SQLException se){
@@ -78,6 +69,29 @@ import keroprecoadmin.dto.DtoProduto;
                 System.out.println("SQL Sate:" +se.getSQLState());
             }
           return removeuComSucesso;
+      }
+      
+      
+      public boolean editar(DtoProduto novoProduto){
+          boolean editouComSucesso = false;
+    
+          String sql = "UPDATE " + super.getNomeSchemma()+"produtos SET nome=? , categoria = ? WHERE idproduto = ?"; 
+            try {
+                PreparedStatement ps = super.getPreparedStatement(sql);
+                ps.setString(1,novoProduto.getNome());
+                ps.setString(2,novoProduto.getCategoria());
+                ps.setInt(3,novoProduto.getIdProduto());
+                
+                editouComSucesso = ps.executeUpdate() > 0;
+                super.destroyConnection();
+
+            } catch (SQLException se){
+                System.out.println("Erro de Insert no SQL");
+                System.out.println("Mensagem :" +se.getMessage());
+                System.out.println("Cod.       :" +se.getErrorCode());
+                System.out.println("SQL Sate:" +se.getSQLState());
+            }
+          return editouComSucesso;
       }
       
       public List<DtoProduto> listarTodos() {
