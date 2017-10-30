@@ -18,7 +18,7 @@ import java.sql.Statement;
 public abstract class DAO {
     
     private Connection con = null;
-    private String nomeSchemma = "db_keropreco.";
+    private String nomeSchemma = " public.";
     
     public Statement getStatement() throws SQLException {
         return this.startConnection().createStatement();
@@ -31,7 +31,7 @@ public abstract class DAO {
     private Connection startConnection(){
        
         String user = "postgres";
-        String pws = "sql1433";
+        String pws = "postgres";
         String driver = "org.postgresql.Driver";
         String url = "jdbc:postgresql://localhost:5432/postgres";
       

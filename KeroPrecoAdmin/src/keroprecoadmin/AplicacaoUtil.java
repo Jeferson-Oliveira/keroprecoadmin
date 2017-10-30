@@ -9,8 +9,9 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import keroprecoadmin.dao.UsuarioDAO;
 import keroprecoadmin.dto.DtoUsuario;
 
 /**
@@ -18,7 +19,7 @@ import keroprecoadmin.dto.DtoUsuario;
  * @author Equipe Optimize
  */
 public class AplicacaoUtil {
-    
+     
     //Instância única que será guardada
     private static AplicacaoUtil instancia = null;
     
@@ -50,10 +51,15 @@ public class AplicacaoUtil {
             if(!this.telaAtual.isShowing()){
                 this.telaAtual.show();
             }
-        }catch(IOException e){
+        }catch(Exception e){
             System.err.println("Ocorreu um erro ao tentar navegar para tela: ".concat(nomeTela));
-            e.printStackTrace();
+           // e.printStackTrace();
         }
+    }
+    
+    public void adicionarMensagemSimples(Alert.AlertType tipo , String mensagem){
+         Alert alerta = new Alert(tipo, mensagem, ButtonType.CLOSE);
+         alerta.show();
     }
 
     public void setTelaAtual(Stage telaAtual) {

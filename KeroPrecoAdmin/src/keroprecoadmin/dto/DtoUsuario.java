@@ -19,11 +19,15 @@ public class DtoUsuario {
     public DtoUsuario() {
     }
 
-    public DtoUsuario(int idUsuario, String nome, String login, String senha) {
-        this.idUsuario = idUsuario;
+    public DtoUsuario(String nome, String login, String senha) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
+    }
+    
+    public DtoUsuario(int idUsuario, String nome, String login, String senha) {
+        this(nome, login, senha);        
+        this.idUsuario = idUsuario;
     }
 
     public int getIdUsuario() {

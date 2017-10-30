@@ -11,13 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import keroprecoadmin.AplicacaoUtil;
+import keroprecoadmin.controllers.abstrato.Controller;
 
 /**
  * FXML Controller class
  *
  * @author Equipe Optimize
  */
-public class HomeFXMLController implements Initializable {
+public class HomeFXMLController extends Controller implements Initializable {
 
     @FXML
     private Label lblSaudacao;

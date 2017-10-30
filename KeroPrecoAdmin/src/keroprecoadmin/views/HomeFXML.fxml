@@ -11,22 +11,24 @@
    <children>
       <MenuBar layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#irParaHome" text="Home" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Usuarios">
             <items>
-              <MenuItem mnemonicParsing="false" text="Cadastrar" />
-                  <MenuItem mnemonicParsing="false" text="Listar" />
+                  <MenuItem mnemonicParsing="false" onAction="#irParaListarUsuarios" text="Listar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Produtos">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Cadastrar" />
-              <MenuItem mnemonicParsing="false" text="Listar" />
+              <MenuItem mnemonicParsing="false" onAction="#irParaListarProdutos" text="Listar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Supermercados">
             <items>
-              <MenuItem mnemonicParsing="false" text="Cadastrar" />
-                  <MenuItem mnemonicParsing="false" text="Listar" />
+                  <MenuItem mnemonicParsing="false" onAction="#irParaListarSupermercados" text="Listar" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Preços">
@@ -39,7 +41,7 @@
       </MenuBar>
       <ToolBar layoutX="509.0" layoutY="346.0" prefHeight="40.0" prefWidth="77.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
-          <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="LogOff" />
+          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#irParaLogin" prefHeight="25.0" prefWidth="61.0" text="LogOff" />
         </items>
       </ToolBar>
       <ImageView fitHeight="123.0" fitWidth="467.0" layoutX="103.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
@@ -47,6 +49,6 @@
             <Image url="@../../imagens/KeroPreco.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblSaudacao" layoutX="286.0" layoutY="81.0" text="Olá " />
+      <Label fx:id="lblSaudacao" layoutX="240.0" layoutY="78.0" text="Olá " />
    </children>
 </AnchorPane>

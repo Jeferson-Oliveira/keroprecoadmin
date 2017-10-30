@@ -9,10 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import keroprecoadmin.AplicacaoUtil;
+import keroprecoadmin.controllers.abstrato.Controller;
 import keroprecoadmin.dao.UsuarioDAO;
 import keroprecoadmin.dto.DtoUsuario;
 
@@ -20,7 +20,7 @@ import keroprecoadmin.dto.DtoUsuario;
  *
  * @author Equipe Optimize
  */
-public class LoginFXMLController implements Initializable {
+public class LoginFXMLController extends Controller implements Initializable {
     
     private UsuarioDAO usuarioDAO = null;
     
@@ -41,18 +41,14 @@ public class LoginFXMLController implements Initializable {
            usuario.setSenha(txSenha.getText());
            
            if(usuarioDAO.existe(usuario)){
-               irParaHome();
+              super.irParaHome(event);
            }else{
-               Alert alerta = new Alert(Alert.AlertType.ERROR, "Usuário Não Encontrado", ButtonType.CLOSE);
-               alerta.show();
+              AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.ERROR, "Usuário não encontrado!");
            }
            
        }
     }
     
-    public void irParaHome(){
-        AplicacaoUtil.getInstancia().irParaTela("HomeFXML.fxml");
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
