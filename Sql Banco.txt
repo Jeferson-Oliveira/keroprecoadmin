@@ -1,97 +1,35 @@
--- Table: public.produtos
+Baixem:
 
--- DROP TABLE public.produtos;
+Netbeans
+JavaFxSceneBuilder - http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html (Versão 2.0)
+PostgreSql - https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows  (Versão 9.6) 
+Git - https://desktop.github.com/
 
-CREATE TABLE public.produtos
-(
-    idproduto bigint NOT NULL DEFAULT nextval('"produtos_idProduto_seq"'::regclass),
-    nome character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    categoria character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT produtos_pkey PRIMARY KEY (idproduto)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
+instalar scene builder
 
-ALTER TABLE public.produtos
-    OWNER to postgres;
+instalar git
+	após isso selecione "clone repository" e selecione o keroprecoadmin
+	será baixada uma cópia do projeto e colocado no repositório (C:Users\[seu usuario]\Documents\GitHub\
 
+instalar postgreSql
+	ao instalar o PostgreSql quando pedir pra definir uma senha coloque "postgres" (sem aspas)
+	ao terminar procure por PGAdmin na aba de aplicativos e inicie
+	selecione file -> preferences -> binary
+	coloque nos campos o endereco de instalação do postgres ex: C:\Program Files\PostgreSQL\9.6\bin e depois salve
+	expanda a aba servers -> postgres (vai pedir a senha, vc coloca "postgres")
+	clique com o botão direito em cima do nome "postgres" e selecione a opção "restore"
+	no campo do diretório coloque o caminho do arquivo "keroprecodb" que o git baixou lá na pasta documents ex: C:Users\[seu usuario]\Documents\GitHub\keroprecoadmin\keroprecodb 
+	clique em restore e aguarde completar com sucesso
 
-----------------------------------------------------------------------------------
-
--- Table: public.supermercados
-
--- DROP TABLE public.supermercados;
-
-CREATE TABLE public.supermercados
-(
-    idsupermercado bigint NOT NULL DEFAULT nextval('"supermercado_idSupermercado_seq"'::regclass),
-    nome character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    localizacao character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT supermercado_pkey PRIMARY KEY (idsupermercado)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.supermercados
-    OWNER to postgres;
+importar projeto no netbeans
+	abra o netbens e selecione a opção "abrir projeto"
+	vá até o diretório que se encontra o projeto baixado no git (Documents) e selecione ele
+	após importar rode o projeto (login e senha "admin")
 
 
------------------------------------------------------------------------------
-
--- Table: public.usuarios
-
--- DROP TABLE public.usuarios;
-
-CREATE TABLE public.usuarios
-(
-    idusuario bigint NOT NULL DEFAULT nextval('"usuarios_idUsuario_seq"'::regclass),
-    nome character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    login character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    senha character varying(250) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT usuarios_pkey PRIMARY KEY (idusuario)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.usuarios
-    OWNER to postgres;
 
 
-------------------------------------------------------------------------------------
 
--- Table: public."produtosSupermercado"
 
--- DROP TABLE public."produtosSupermercado";
 
-CREATE TABLE public."produtosSupermercado"
-(
-    idprodutosupermercado bigint NOT NULL DEFAULT nextval('"produtosSupermercado_idProdutoSupermercado_seq"'::regclass),
-    fkidproduto bigint NOT NULL,
-    fkidsupermercado bigint NOT NULL,
-    CONSTRAINT "produtosSupermercado_pkey" PRIMARY KEY (idprodutosupermercado),
-    CONSTRAINT produto FOREIGN KEY (fkidproduto)
-        REFERENCES public.produtos (idproduto) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT supermercado FOREIGN KEY (fkidsupermercado)
-        REFERENCES public.supermercados (idsupermercado) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public."produtosSupermercado"
-    OWNER to postgres;
-
----------------------------------------------------------------------------------------------
-
-INSERT INTO public.usuarios (nome , login , senha) VALUES ('Administrador','admin' ,'admin') 
+-
