@@ -27,9 +27,4 @@ importar projeto no netbeans
 	após importar rode o projeto (login e senha "admin")
 
 
-
-
-
-
-
 -
