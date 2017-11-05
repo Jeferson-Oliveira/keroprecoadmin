@@ -4,9 +4,10 @@ package keroprecoadmin.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import keroprecoadmin.controllers.abstrato.Controller;
 
 
-public class UsuarioFXMLController implements Initializable {
+public class UsuarioFXMLController extends Controller implements Initializable {
 
   
     @Override

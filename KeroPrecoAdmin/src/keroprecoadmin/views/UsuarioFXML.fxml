@@ -7,20 +7,44 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.UsuarioFXMLController">
    <children>
+       <MenuBar layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+            <Menu mnemonicParsing="false" text="Home">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#irParaHome" text="Home" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Usuarios">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#irParaListarUsuarios" text="Listar" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Produtos">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#irParaListarProdutos" text="Listar" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Supermercados">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#irParaListarSupermercados" text="Listar" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Preços">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Cadastrar" />
+                  <MenuItem mnemonicParsing="false" text="Alterar" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
       <Label layoutX="22.0" layoutY="147.0" text="Telefone:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Button layoutX="26.0" layoutY="355.0" mnemonicParsing="false" text="Criar">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="100.0" layoutY="355.0" mnemonicParsing="false" text="Cancelar">
+      <Button layoutX="519.0" layoutY="355.0" mnemonicParsing="false" text="Criar">
          <font>
             <Font size="14.0" />
          </font>
@@ -35,31 +59,31 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="268.0" prefHeight="17.0" prefWidth="62.0" text="Usuário:">
+      <Label layoutX="21.0" layoutY="276.0" prefHeight="17.0" prefWidth="62.0" text="Usuário:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="195.0" layoutY="268.0" prefHeight="17.0" prefWidth="41.0" text="Senha:">
+      <Label layoutX="195.0" layoutY="276.0" prefHeight="17.0" prefWidth="41.0" text="Senha:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="268.0" text="Confirmação de senha:">
+      <Label layoutX="372.0" layoutY="274.0" text="Confirmação de senha:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="200.0" layoutY="14.0" prefHeight="26.0" prefWidth="219.0" text="Cadastro de novo usuário">
+      <Label layoutX="21.0" layoutY="52.0" prefHeight="26.0" prefWidth="219.0" text="Cadastro de novo usuário">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="103.0" prefHeight="25.0" prefWidth="292.0" />
-      <TextField layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="178.0" />
-      <TextField layoutX="14.0" layoutY="232.0" prefHeight="25.0" prefWidth="251.0" />
-      <TextField layoutX="14.0" layoutY="304.0" />
+      <TextField layoutX="21.0" layoutY="112.0" prefHeight="25.0" prefWidth="292.0" />
+      <TextField layoutX="21.0" layoutY="175.0" prefHeight="25.0" prefWidth="178.0" />
+      <TextField layoutX="20.0" layoutY="234.0" prefHeight="25.0" prefWidth="251.0" />
+      <TextField layoutX="19.0" layoutY="304.0" />
       <TextField layoutX="191.0" layoutY="304.0" />
-      <TextField layoutX="381.0" layoutY="304.0" />
+      <TextField layoutX="370.0" layoutY="304.0" />
    </children>
 </AnchorPane>
