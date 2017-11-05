@@ -1,6 +1,8 @@
 
 package keroprecoadmin.dto;
 
+import java.util.Objects;
+
 
 public class DtoProdutoSupermercado {
     
@@ -10,16 +12,22 @@ public class DtoProdutoSupermercado {
     private double preco;
 
     //Construtores
-    public DtoProdutoSupermercado(int idProdutoSupermercado, DtoProduto produto, DtoSupermercado supermercado, double preco) {
-        this.idProdutoSupermercado = idProdutoSupermercado;
+    public DtoProdutoSupermercado() {
+    
+    }
+
+    public DtoProdutoSupermercado(DtoProduto produto, DtoSupermercado supermercado, double preco) {
         this.produto = produto;
         this.supermercado = supermercado;
         this.preco = preco;
     }
-
-    public DtoProdutoSupermercado() {
-    }
     
+    public DtoProdutoSupermercado(int idProdutoSupermercado, DtoProduto produto, DtoSupermercado supermercado, double preco) {
+        this(produto , supermercado , preco);
+        this.idProdutoSupermercado = idProdutoSupermercado;
+    }
+
+
     
     //Metodos
     
@@ -55,5 +63,8 @@ public class DtoProdutoSupermercado {
         this.preco = preco;
     }
     
-    
+    public String getNomeProduto(){
+        return this.produto.getNome();
+    }
+
 }

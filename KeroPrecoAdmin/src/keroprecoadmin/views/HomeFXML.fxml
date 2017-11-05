@@ -34,7 +34,6 @@
             <Menu mnemonicParsing="false" text="Preços">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#irParaCadastroPrecos" text="Cadastrar" />
-                  <MenuItem mnemonicParsing="false" text="Alterar" />
               </items>
             </Menu>
         </menus>

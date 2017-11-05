@@ -16,10 +16,9 @@ public class ProdutoSupermercadoDAO extends DAO{
    public List<DtoProdutoSupermercado> listarProdutos(DtoSupermercado supermercado){
        
        List<DtoProdutoSupermercado> listaRetorno = new LinkedList<DtoProdutoSupermercado>();
-       String sql = "SELECT idprodutosupermercado ,idproduto,nome, categoria ,preco" +
-       "FROM "+ super.getNomeSchemma() +"produtosSupermercado inner join " + 
-        super.getNomeSchemma() +"produtos on " + super.getNomeSchemma() +"produtos.'idproduto' = " 
-       + super.getNomeSchemma() + "produtosSupermercado.'fkidproduto' where "+ super.getNomeSchemma() +"produtosSupermercado.'fkidsupermercado' = ?";
+       String sql = "SELECT idprodutosupermercado ,idproduto ,nome, categoria ,preco" +
+       " FROM "+ super.getNomeSchemma() +"\"produtosSupermercado\" as tbps inner join " + 
+        super.getNomeSchemma() +"produtos as tbp on tbp.idproduto = tbps.fkidproduto where tbps.fkidsupermercado = ?;";
         
        try {
             
@@ -45,7 +44,7 @@ public class ProdutoSupermercadoDAO extends DAO{
           boolean inseriuComSucesso = false;
           
 
-        String sql = "INSERT INTO "+ super.getNomeSchemma() +"produtosSupermercado(fkidproduto, fkidsupermercado, preco) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO "+ super.getNomeSchemma() +"\"produtosSupermercado\"(fkidproduto, fkidsupermercado, preco) VALUES (?, ?, ?)";
          
             try {
                 PreparedStatement ps = super.getPreparedStatement(sql);
@@ -78,8 +77,8 @@ public class ProdutoSupermercadoDAO extends DAO{
       public boolean remover(DtoProdutoSupermercado preco){
           boolean removeuComSucesso = false;
           
-          String sql = "DELETE FROM " + super.getNomeSchemma()+"produtosSupermercados WHERE idprodutosupermercado = ?";
-           
+          String sql = "DELETE FROM " + super.getNomeSchemma()+"\"produtosSupermercado\" WHERE idprodutosupermercado = ?";
+             
             try {
                 PreparedStatement ps = super.getPreparedStatement(sql);
                 ps.setInt(1,preco.getIdProdutoSupermercado());
@@ -100,7 +99,7 @@ public class ProdutoSupermercadoDAO extends DAO{
       public boolean editar(DtoProdutoSupermercado preco    ){
           boolean editouComSucesso = false;
     
-          String sql = "UPDATE " + super.getNomeSchemma() +"produtosSupermercado SET preco = ? WHERE idprodutosupermercado=?"; 
+          String sql = "UPDATE " + super.getNomeSchemma() +"\"produtosSupermercado\" SET preco = ? WHERE idprodutosupermercado=?"; 
             try {
                 PreparedStatement ps = super.getPreparedStatement(sql);
                 ps.setDouble(1,preco.getPreco());

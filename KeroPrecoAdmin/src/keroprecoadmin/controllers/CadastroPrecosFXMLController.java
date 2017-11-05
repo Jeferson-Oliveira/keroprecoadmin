@@ -56,20 +56,84 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
             tbProdutosSupermercados.setItems(precos);
         }
     }
-
-    @FXML
-    void obterDadosProduto(ActionEvent event) {
-
-    }
-
+    
+    
     @FXML
     void cadastrarPreco(ActionEvent event) {
-
+        
+        String tx = txPreco.getText();
+        tx = tx.replace(',',   '.');
+       
+        if(cbSupermercados.getValue() != null && cbProdutos.getValue() != null && precoDigitadoValido(tx)) {
+        
+            DtoSupermercado supermercadoSelecionado = cbSupermercados.getValue();
+            DtoProduto produtoSelecionado = cbProdutos.getValue();
+            
+            Double preco = Double.parseDouble(tx); /// Validar conteudo de texto
+            
+            if(existeProdutoNoSupermercado(produtoSelecionado)){
+                AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Este Produto já foi cadastrado para o supermercado selecionado.");
+            }else {
+                DtoProdutoSupermercado novoPreco = new DtoProdutoSupermercado(produtoSelecionado, supermercadoSelecionado, preco);
+                if(produtoSupermercadoDAO.inserir(novoPreco)){
+                    carregarProdutosSupermercado(null);
+                }
+            }
+        }
+    }
+    
+    private boolean precoDigitadoValido(String preco){
+        boolean valido = true; 
+        int quantidadeNumeros = 0;
+        
+        
+        if(preco.isEmpty()){
+            return false;
+        }
+        
+        for(Character c : preco.toCharArray()){
+            if(Character.isAlphabetic(c) && c != '.'){
+                valido = false;
+            }
+            if(Character.isDigit(c)){
+                quantidadeNumeros++;
+            }
+        }
+        
+        if(quantidadeNumeros == 0){
+            return false;
+        }
+        
+        return valido;
+    }  
+    private boolean existeProdutoNoSupermercado(DtoProduto produto){
+        
+        for (DtoProdutoSupermercado produtoSupermercado : tbProdutosSupermercados.getItems()) {
+            if(produtoSupermercado.getProduto().getIdProduto() == produto.getIdProduto()){
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     @FXML
     void removerPreco(ActionEvent event) {
-
+         // Se existe algum item selecionado
+        if(!tbProdutosSupermercados.getSelectionModel().isEmpty()) {
+            ObservableList<DtoProdutoSupermercado> itensDaLista = tbProdutosSupermercados.getItems();
+            ObservableList<DtoProdutoSupermercado> itensSelecionados = tbProdutosSupermercados.getSelectionModel().getSelectedItems();
+            
+            //IR no DTO e remover os itens selecionados
+            if(produtoSupermercadoDAO.remover(itensSelecionados.get(0))){
+                //Remove os itens que estão selecionados da tabela
+                itensSelecionados.forEach(itensDaLista::remove);
+                tbProdutosSupermercados.getSelectionModel().clearSelection();
+            }else {
+                AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível remover o registro!");
+            }
+            
+        }
     }
    
     @Override
@@ -86,20 +150,19 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
                 
       // Adicionando Colunas na tabela de produtos
         TableColumn<DtoProdutoSupermercado , String > colunaNome = new TableColumn("Nome");
-        colunaNome.setMinWidth(200);
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaNome.setCellFactory(TextFieldTableCell.forTableColumn());
-                
-        TableColumn<DtoProdutoSupermercado , String > colunaPreco = new TableColumn("Preco");
-        colunaPreco.setMinWidth(200);
+        colunaNome.setMinWidth(100);
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+    
+        TableColumn<DtoProdutoSupermercado , Double > colunaPreco = new TableColumn("Preco");
+        colunaPreco.setMinWidth(100);
         colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-        colunaPreco.setCellFactory(TextFieldTableCell.forTableColumn());
+        //colunaPreco.setCellFactory(TextFieldTableCell.forTableColumn());
         colunaPreco.setOnEditCommit((cell) ->{
             DtoProdutoSupermercado produtoEditado = ((DtoProdutoSupermercado) cell.getTableView().getItems().get(cell.getTablePosition().getRow()));
-            produtoEditado.setPreco(Double.parseDouble(cell.getNewValue()));
+            produtoEditado.setPreco(cell.getNewValue());
             
             if(!produtoSupermercadoDAO.editar(produtoEditado)){
-             produtoEditado.setPreco(Double.parseDouble(cell.getOldValue()));
+             produtoEditado.setPreco(cell.getOldValue());
              AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível atualizar o registros");
             }
             
@@ -115,7 +178,7 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
         cbSupermercados.setConverter(new StringConverter <DtoSupermercado>() {
            public String toString(DtoSupermercado object) {
                if(object!=null){
-                   return object.getNome() + object.getLocalizacao();
+                   return object.getNome() + " " + object.getLocalizacao();
                }
                return null;
            }
