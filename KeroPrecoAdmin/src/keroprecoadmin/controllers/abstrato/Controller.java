@@ -41,4 +41,9 @@ public abstract class Controller {
     public void irParaListarUsuarios(ActionEvent event) {
         AplicacaoUtil.getInstancia().irParaTela("UsuarioFXML.fxml");
     }
+    
+     @FXML
+    public void irParaCadastroPrecos(ActionEvent event) {
+       AplicacaoUtil.getInstancia().irParaTela("CadastroPrecosFXML.fxml");
+    }
 }
