@@ -140,7 +140,7 @@ public class ProdutosFXMLController extends Controller implements Initializable 
             
             if(!produtoDAO.editar(produtoEditado)){
              produtoEditado.setCategoria(cell.getOldValue());
-             AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível atualizar o registro!s");
+             AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível atualizar o registros");
             }
             
         });

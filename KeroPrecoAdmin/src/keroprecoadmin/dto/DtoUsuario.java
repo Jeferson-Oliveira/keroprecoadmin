@@ -61,5 +61,9 @@ public class DtoUsuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public void setUsuario(String newValue) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

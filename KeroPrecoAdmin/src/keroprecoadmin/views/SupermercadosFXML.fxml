@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.ProdutosFXMLController">
-     <children>
-      <MenuBar layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="keroprecoadmin.controllers.SupermercadosFXMLController">
+    <children>  <!--filho -->
+        <MenuBar layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
             <Menu mnemonicParsing="false" text="Home">
               <items>
@@ -39,31 +39,26 @@
             </Menu>
         </menus>
       </MenuBar>
-      <VBox layoutX="5.0" layoutY="52.0" prefHeight="348.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox layoutY="51.0" prefHeight="349.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label text="Produtos">
+            <Label prefHeight="35.0" prefWidth="601.0" text="Supermercados">
                <font>
                   <Font size="24.0" />
-               </font></Label>
-            <TableView fx:id="tbProdutos" editable="true" prefHeight="260.0" prefWidth="600.0" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="85.0" prefWidth="600.0" spacing="20.0">
+               </font>
+            </Label>
+            <TableView fx:id="tbSupermercados" prefHeight="244.0" prefWidth="600.0" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="142.0" promptText="Nome" />
-                  <TextField fx:id="txtCategoria" promptText="Categoria" />
-                  <Button mnemonicParsing="false" onAction="#adicionarNovoProduto" text="Adicionar">
-                     
-                  </Button>
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#removerProdutoSelecionado" text="Remover" />
+                  <TextField fx:id="txNome" promptText="Nome" />
+                  <TextField fx:id="txLocalizacao" promptText="Localização" />
+                  <Button mnemonicParsing="false" onAction="#adionarSupermecado" text="Adicionar" />
+                  <Button mnemonicParsing="false" onAction="#removerSupermercado" text="Remover" />
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
-               
             </HBox>
          </children>
       </VBox>
-   </children>
+    </children>
 </AnchorPane>

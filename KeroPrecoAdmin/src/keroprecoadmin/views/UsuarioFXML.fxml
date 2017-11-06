@@ -1,65 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="22.0" layoutY="147.0" text="Telefone:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Button layoutX="26.0" layoutY="355.0" mnemonicParsing="false" text="Criar">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="100.0" layoutY="355.0" mnemonicParsing="false" text="Cancelar">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="22.0" layoutY="213.0" prefHeight="17.0" prefWidth="49.0" text="E-mail:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="21.0" layoutY="84.0" prefHeight="17.0" prefWidth="100.0" text="Nome Completo:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="21.0" layoutY="268.0" prefHeight="17.0" prefWidth="62.0" text="Usuário:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="195.0" layoutY="268.0" prefHeight="17.0" prefWidth="41.0" text="Senha:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="381.0" layoutY="268.0" text="Confirmação de senha:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="200.0" layoutY="14.0" prefHeight="26.0" prefWidth="219.0" text="Cadastro de novo usuário">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Label>
-      <TextField layoutX="14.0" layoutY="103.0" prefHeight="25.0" prefWidth="292.0" />
-      <TextField layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="178.0" />
-      <TextField layoutX="14.0" layoutY="232.0" prefHeight="25.0" prefWidth="251.0" />
-      <TextField layoutX="14.0" layoutY="304.0" />
-      <TextField layoutX="191.0" layoutY="304.0" />
-      <TextField layoutX="381.0" layoutY="304.0" />
-   </children>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.UsuarioFXMLController">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="0.0" prefHeight="51.0" prefWidth="600.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Home">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#irParaHome" text="Home" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Usuarios">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#irParaListarUsuarios" text="Listar" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Produtos">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#irParaListarProdutos" text="Listar" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Supermercados">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#irParaListarSupermercados" text="Listar" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Preços">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#irParaCadastroPrecos" text="Cadastrar" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <HBox layoutX="0.0" layoutY="317.0" prefHeight="83.0" prefWidth="600.0" spacing="0.0">
+      <children>
+            <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="123.0" promptText="Nome" />
+        <TextField fx:id="txtUsuario" prefWidth="123.0" promptText="Usuário" />
+        <PasswordField fx:id="pswSenha" prefWidth="129.0" promptText="Senha" />
+        <PasswordField fx:id="pswConfSenha" prefWidth="116.0" promptText="Confirme a senha" />
+        <Button fx:id="btnCriarUsuario" mnemonicParsing="false" text="Criar" />
+        <Button fx:id="btnRemUsuario" mnemonicParsing="false" text="Remover" />
+      </children>
+      <padding>
+        <Insets left="1.0" top="30.0" />
+      </padding>
+    </HBox>
+    <TableView fx:id="tbUsuarios" layoutX="1.0" layoutY="51.0" prefHeight="266.0" prefWidth="597.0" />
+  </children>
 </AnchorPane>
