@@ -14,7 +14,10 @@ public class DtoUsuario {
     private int idUsuario;
     private String nome;
     private String login;
+    private String usuario;
     private String senha;
+
+
 
     public DtoUsuario() {
     }
@@ -23,6 +26,7 @@ public class DtoUsuario {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
+        
     }
     
     public DtoUsuario(int idUsuario, String nome, String login, String senha) {
@@ -52,7 +56,15 @@ public class DtoUsuario {
 
     public void setLogin(String login) {
         this.login = login;
+        login = usuario;
     }
+        public String getUsuario() {
+        return usuario;
+    }
+    public String setUsuario(){
+        this.usuario = usuario;
+        return null;
+    }    
 
     public String getSenha() {
         return senha;

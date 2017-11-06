@@ -45,8 +45,8 @@
         <TextField fx:id="txtUsuario" prefWidth="123.0" promptText="Usuário" />
         <PasswordField fx:id="pswSenha" prefWidth="129.0" promptText="Senha" />
         <PasswordField fx:id="pswConfSenha" prefWidth="116.0" promptText="Confirme a senha" />
-        <Button fx:id="btnCriarUsuario" mnemonicParsing="false" text="Criar" />
-        <Button fx:id="btnRemUsuario" mnemonicParsing="false" text="Remover" />
+        <Button fx:id="btnCriarUsuario" mnemonicParsing="false" onAction="#adicionarNovoUsuario" text="Criar" />
+        <Button fx:id="btnRemUsuario" mnemonicParsing="false" onAction="#removerUsuarioSelecionado" text="Remover" />
       </children>
       <padding>
         <Insets left="1.0" top="30.0" />

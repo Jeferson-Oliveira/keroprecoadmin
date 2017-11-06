@@ -54,40 +54,43 @@ public class UsuarioFXMLController extends Controller implements Initializable {
     @FXML
     private TextField txtUsuario;
 
-    
+    @FXML
     void adicionarNovoUsuario(ActionEvent event) {
         
-        // Verifica se os campos de nome e categoria foram preenchidos
+        // Verifica se os campos de nome,usuario,senha e confirmação de senha foram preenchidos
         if(!txtNome.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pswSenha.getText().isEmpty() && !pswConfSenha.getText().isEmpty()){ 
-            if (pswSenha.getText() == pswConfSenha.getText()){
+            //if (pswSenha.getText() == pswConfSenha.getText()){
                 //IR no DTO e InserirRegistro no banco
             
-             //Tenta Inserir o usuario no banco de dados
-            DtoUsuario novoUsuario = new DtoUsuario(txtNome.getText(), txtUsuario.getText(),pswSenha.getText());
-            if(usuarioDAO.inserir(novoUsuario)){
+                 //Tenta Inserir o usuario no banco de dados
+                 DtoUsuario novoUsuario = new DtoUsuario(txtNome.getText(), txtUsuario.getText(),pswSenha.getText());
+                    if(usuarioDAO.inserir(novoUsuario)){
                 
-                //Adiciona o produto na tabela
-                //tbProdutos.getItems().add(novoProduto);
                
-                //Verificar retorno da id do elemento inserido
-                tbUsuarios.setItems(obterUsuariosCadastrados());
+               
+                    //Verificar retorno da id do elemento inserido
+                    tbUsuarios.setItems(obterUsuariosCadastrados());
                 
-                // limpa os campos que antes estavam preenchidos
-                txtNome.clear();
-                txtUsuario.clear();
-                pswSenha.clear();
-                pswConfSenha.clear();
+                    // limpa os campos que antes estavam preenchidos
+                    txtNome.clear();
+                    txtUsuario.clear();
+                    pswSenha.clear();
+                    pswConfSenha.clear();
                 
-            }
-            
-            } else{
-                AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "As senhas não conferem!");
-            }
-            }else {
-                AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível inserir o registro!");
-            }
-           
+                    }//fim do if (inserirNovoUsuario)
+                     else{
+                    AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível criar usuario");
+                    }
+                //}//fim do if (conferindo as senhas) 
+                // else{
+               // AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "As senhas não conferem!");
+               // }//fim do else(conferindo as senhas)
+            }//fim do if (campos vazios)
+        else {
+        AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Campos Vazios! favor preencher os campos");
         }
+           
+    }
     
     
     private ObservableList<DtoUsuario> obterUsuariosCadastrados(){
@@ -97,8 +100,8 @@ public class UsuarioFXMLController extends Controller implements Initializable {
     }
     
     
-    
-    void removerProdutoSelecionado(ActionEvent event) {
+    @FXML
+    void removerUsuarioSelecionado(ActionEvent event) {
         
         // Se existe algum item selecionado
         if(!tbUsuarios.getSelectionModel().isEmpty()) {
