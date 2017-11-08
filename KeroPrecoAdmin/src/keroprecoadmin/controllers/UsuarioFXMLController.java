@@ -16,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import keroprecoadmin.AplicacaoUtil;
 import keroprecoadmin.controllers.abstrato.Controller;
 import keroprecoadmin.dao.UsuarioDAO;
@@ -35,7 +37,7 @@ public class UsuarioFXMLController extends Controller implements Initializable {
     
     @FXML
     private Button btnCriarUsuario;
-
+   
     @FXML
     private Button btnRemUsuario;
 
@@ -53,13 +55,12 @@ public class UsuarioFXMLController extends Controller implements Initializable {
 
     @FXML
     private TextField txtUsuario;
-
+    
     @FXML
-    void adicionarNovoUsuario(ActionEvent event) {
-        
-        // Verifica se os campos de nome,usuario,senha e confirmação de senha foram preenchidos
-        if(!txtNome.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pswSenha.getText().isEmpty() && !pswConfSenha.getText().isEmpty()){ 
-            //if (pswSenha.getText() == pswConfSenha.getText()){
+    void irComEnter(KeyEvent e) {
+        if(e.getCode()== KeyCode.ENTER ){
+           if(!txtNome.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pswSenha.getText().isEmpty() && !pswConfSenha.getText().isEmpty()){ 
+            if (pswSenha.getText().equals(pswConfSenha.getText()) ){
                 //IR no DTO e InserirRegistro no banco
             
                  //Tenta Inserir o usuario no banco de dados
@@ -79,12 +80,51 @@ public class UsuarioFXMLController extends Controller implements Initializable {
                 
                     }//fim do if (inserirNovoUsuario)
                      else{
-                    AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível criar usuario");
+                        AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível criar usuario");
                     }
-                //}//fim do if (conferindo as senhas) 
-                // else{
-               // AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "As senhas não conferem!");
-               // }//fim do else(conferindo as senhas)
+                }//fim do if (conferindo as senhas) 
+                else{
+                AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "As senhas não conferem!");
+               }//fim do else(conferindo as senhas)
+            }//fim do if (campos vazios)
+        else {
+        AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Campos Vazios! favor preencher os campos");
+             }//fim do else campos vazios
+        }
+        
+    }
+    
+    @FXML
+    void adicionarNovoUsuario(ActionEvent event) {
+        
+        // Verifica se os campos de nome,usuario,senha e confirmação de senha foram preenchidos
+        if(!txtNome.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pswSenha.getText().isEmpty() && !pswConfSenha.getText().isEmpty()){ 
+            if (pswSenha.getText().equals(pswConfSenha.getText()) ){
+                //IR no DTO e InserirRegistro no banco
+            
+                 //Tenta Inserir o usuario no banco de dados
+                 DtoUsuario novoUsuario = new DtoUsuario(txtNome.getText(), txtUsuario.getText(),pswSenha.getText());
+                    if(usuarioDAO.inserir(novoUsuario)){
+                
+               
+               
+                    //Verificar retorno da id do elemento inserido
+                    tbUsuarios.setItems(obterUsuariosCadastrados());
+                
+                    // limpa os campos que antes estavam preenchidos
+                    txtNome.clear();
+                    txtUsuario.clear();
+                    pswSenha.clear();
+                    pswConfSenha.clear();
+                
+                    }//fim do if (inserirNovoUsuario)
+                     else{
+                        AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível criar usuario");
+                    }
+                }//fim do if (conferindo as senhas) 
+                else{
+                AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "As senhas não conferem!");
+               }//fim do else(conferindo as senhas)
             }//fim do if (campos vazios)
         else {
         AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Campos Vazios! favor preencher os campos");
@@ -169,7 +209,7 @@ private void configurarTabela(){
         
         TableColumn<DtoUsuario , String > colunaUsuario = new TableColumn("Usuario");
         colunaUsuario.setMinWidth(200);
-        colunaUsuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
+        colunaUsuario.setCellValueFactory(new PropertyValueFactory<>("login"));
         colunaUsuario.setCellFactory(TextFieldTableCell.forTableColumn());
         colunaUsuario.setOnEditCommit((cell) ->{
             DtoUsuario usuarioEditado = ((DtoUsuario) cell.getTableView().getItems().get(cell.getTablePosition().getRow()));
