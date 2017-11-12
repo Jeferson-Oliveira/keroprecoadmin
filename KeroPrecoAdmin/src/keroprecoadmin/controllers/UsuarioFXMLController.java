@@ -213,10 +213,10 @@ private void configurarTabela(){
         colunaUsuario.setCellFactory(TextFieldTableCell.forTableColumn());
         colunaUsuario.setOnEditCommit((cell) ->{
             DtoUsuario usuarioEditado = ((DtoUsuario) cell.getTableView().getItems().get(cell.getTablePosition().getRow()));
-            usuarioEditado.setUsuario(cell.getNewValue());
+            //usuarioEditado.setUsuario(cell.getNewValue());
             
             if(!usuarioDAO.editar(usuarioEditado)){
-             usuarioEditado.setUsuario(cell.getOldValue());
+             //usuarioEditado.setUsuario(cell.getOldValue());
              AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Não foi possível atualizar o registros");
             }
             

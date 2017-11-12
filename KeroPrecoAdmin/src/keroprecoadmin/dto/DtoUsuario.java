@@ -5,6 +5,8 @@
  */
 package keroprecoadmin.dto;
 
+import keroprecoadmin.Perfil;
+
 /**
  *
  * @author Equipe Optimize
@@ -12,6 +14,7 @@ package keroprecoadmin.dto;
 public class DtoUsuario {
     
     private int idUsuario;
+    private Perfil perfil = Perfil.ADMINISTRADOR;
     private String nome;
     private String login;
     private String usuario;
@@ -74,8 +77,13 @@ public class DtoUsuario {
         this.senha = senha;
     }
 
-    public void setUsuario(String newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Perfil getPerfil() {
+        return perfil;
     }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
     
 }

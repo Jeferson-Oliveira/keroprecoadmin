@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import keroprecoadmin.AplicacaoUtil;
+import keroprecoadmin.Perfil;
 import keroprecoadmin.controllers.abstrato.Controller;
 import keroprecoadmin.dao.UsuarioDAO;
 import keroprecoadmin.dto.DtoUsuario;
@@ -41,7 +42,13 @@ public class LoginFXMLController extends Controller implements Initializable {
            usuario.setSenha(txSenha.getText());
            
            if(usuarioDAO.existe(usuario)){
-              super.irParaHome(event);
+           
+               if(usuario.getPerfil().equals(Perfil.ADMINISTRADOR)){
+                   super.irParaHome(event);
+               } else {
+                   super.irParaListarPrecos(event);
+               }
+           
            }else{
               AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.ERROR, "Usuário não encontrado!");
            }
