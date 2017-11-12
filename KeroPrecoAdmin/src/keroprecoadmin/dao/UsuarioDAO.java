@@ -20,7 +20,7 @@ import keroprecoadmin.dto.DtoUsuario;
  */
 public class UsuarioDAO extends DAO {
     
-    public DtoUsuario existe(DtoUsuario usuario){
+    public boolean existe(DtoUsuario usuario){
         
         boolean existe = false;
         // Fazer Conexão com o banco de dados e verificar a existencia do registro na base
@@ -53,7 +53,7 @@ public class UsuarioDAO extends DAO {
             AplicacaoUtil.getInstancia().setUsuarioLogado(retorno);
             existe = true;
         }
-        return retorno;
+        return existe;
     }
     
     public boolean existeUserName(DtoUsuario usuario){
@@ -72,12 +72,13 @@ public class UsuarioDAO extends DAO {
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
               retorno = new DtoUsuario(rs.getString("nome"),rs.getString("login"),"");
+              
               if(rs.getInt("perfil") == Perfil.ADMINISTRADOR.getCodigoPerfil()){
-               retorno.setPerfil(Perfil.ADMINISTRADOR);
-             }else{
-               retorno.setPerfil(Perfil.USUARIO);
-             }
-              usuario = retorno;
+                retorno.setPerfil(Perfil.ADMINISTRADOR);
+              }else{
+                retorno.setPerfil(Perfil.USUARIO);
+              }
+              
             }
             rs.close();
             super.destroyConnection();
@@ -87,7 +88,6 @@ public class UsuarioDAO extends DAO {
         
         // Caso haja um retorno na consulta com o banco de dados colocamos a variável como verdadeira e retornamos
         if(retorno != null){
-            AplicacaoUtil.getInstancia().setUsuarioLogado(retorno);
             existe = true;
         }
         return existe;
@@ -107,14 +107,6 @@ public class UsuarioDAO extends DAO {
                 
                 ps.executeUpdate();
                 
-//                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-//                    if (generatedKeys.next()) {
-//                        novoProduto.setIdProduto(generatedKeys.getInt(1));
-//                    }
-//                    else {
-//                        throw new SQLException("Erro ao Inserir Produto.");
-//                    }
-//                }
                 super.destroyConnection();
                 inseriuComSucesso = true;
 
@@ -152,12 +144,13 @@ public class UsuarioDAO extends DAO {
       public boolean editar(DtoUsuario usuario){
           boolean editouComSucesso = false;
     
-          String sql = "UPDATE " + super.getNomeSchemma()+"usuarios SET nome=? , login = ? WHERE idusuario = ?"; 
+          String sql = "UPDATE " + super.getNomeSchemma()+"usuarios SET nome=? , login = ? , perfil = ? WHERE idusuario = ?"; 
             try {
                 PreparedStatement ps = super.getPreparedStatement(sql);
                 ps.setString(1,usuario.getNome());
                 ps.setString(2,usuario.getLogin());
-                ps.setInt(3,usuario.getIdUsuario());
+                ps.setInt(3,usuario.getPerfil().getCodigoPerfil());
+                ps.setInt(4,usuario.getIdUsuario());
                 
                 editouComSucesso = ps.executeUpdate() > 0;
                 super.destroyConnection();
@@ -173,16 +166,22 @@ public class UsuarioDAO extends DAO {
       
       public List<DtoUsuario> listarTodos() {
           
-        String sql = "SELECT idusuario,nome,login FROM " + super.getNomeSchemma()+"usuarios";
+        String sql = "SELECT idusuario,nome,login,perfil FROM " + super.getNomeSchemma()+"usuarios";
         List<DtoUsuario> lstret = new LinkedList<>();
                 
         try {
             
             ResultSet rs = super.getStatement().executeQuery(sql);
             while (rs.next()){
-                lstret.add(new DtoUsuario(rs.getInt("idusuario"), 
+                DtoUsuario usuario = new DtoUsuario(rs.getInt("idusuario"), 
                                             rs.getString("nome"), 
-                                            rs.getString("login") , ""));
+                                            rs.getString("login") , "");
+                if(rs.getInt("perfil") == Perfil.ADMINISTRADOR.getCodigoPerfil()){
+                    usuario.setPerfil(Perfil.ADMINISTRADOR);
+                }else{
+                    usuario.setPerfil(Perfil.USUARIO);
+                }
+                lstret.add(usuario);
             }
             rs.close();
             super.destroyConnection();

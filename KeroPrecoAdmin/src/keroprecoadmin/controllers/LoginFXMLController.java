@@ -40,10 +40,10 @@ public class LoginFXMLController extends Controller implements Initializable {
           
            usuario.setLogin(txtLogin.getText());
            usuario.setSenha(txSenha.getText());
-           DtoUsuario usuarioBanco = usuarioDAO.existe(usuario);
-           if(usuarioBanco != null){
+        
+           if(usuarioDAO.existe(usuario)){
            
-               if(usuarioBanco.getPerfil().getCodigoPerfil() == (Perfil.ADMINISTRADOR.getCodigoPerfil())){
+               if(AplicacaoUtil.getInstancia().getUsuarioLogado().getPerfil().getCodigoPerfil() == (Perfil.ADMINISTRADOR.getCodigoPerfil())){
                    super.irParaHome(event);
                } else {
                    super.irParaListarPrecos(event);

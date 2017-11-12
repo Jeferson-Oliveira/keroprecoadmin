@@ -26,6 +26,7 @@ public class DtoUsuario {
     }
 
     public DtoUsuario(String nome, String login, String senha) {
+        this.perfil = Perfil.USUARIO;
         this.nome = nome;
         this.login = login;
         this.senha = senha;
