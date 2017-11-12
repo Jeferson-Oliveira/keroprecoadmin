@@ -40,7 +40,7 @@
       </MenuBar>
       <ToolBar layoutX="509.0" layoutY="346.0" prefHeight="40.0" prefWidth="77.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
-          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#irParaLogin" prefHeight="25.0" prefWidth="61.0" text="LogOff" />
+          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#irParaLogin" prefHeight="25.0" prefWidth="61.0" text="Sair" />
         </items>
       </ToolBar>
       <ImageView fitHeight="123.0" fitWidth="467.0" layoutX="103.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">

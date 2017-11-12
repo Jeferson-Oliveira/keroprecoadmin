@@ -40,10 +40,10 @@ public class LoginFXMLController extends Controller implements Initializable {
           
            usuario.setLogin(txtLogin.getText());
            usuario.setSenha(txSenha.getText());
+           DtoUsuario usuarioBanco = usuarioDAO.existe(usuario);
+           if(usuarioBanco != null){
            
-           if(usuarioDAO.existe(usuario)){
-           
-               if(usuario.getPerfil().equals(Perfil.ADMINISTRADOR)){
+               if(usuarioBanco.getPerfil().getCodigoPerfil() == (Perfil.ADMINISTRADOR.getCodigoPerfil())){
                    super.irParaHome(event);
                } else {
                    super.irParaListarPrecos(event);
@@ -61,5 +61,10 @@ public class LoginFXMLController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         usuarioDAO = new UsuarioDAO();
     }    
+    
+     @FXML
+    void irParaCadastroUsuario(ActionEvent event) {
+        AplicacaoUtil.getInstancia().irParaTela("CadastroUsuarioFXML.fxml");
+    }
     
 }

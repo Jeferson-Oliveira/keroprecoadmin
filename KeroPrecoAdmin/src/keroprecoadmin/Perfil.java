@@ -12,7 +12,7 @@ package keroprecoadmin;
 public enum Perfil {
     ADMINISTRADOR(2), USUARIO(1);
     
-    private final int codigoPerfil;
+    private int codigoPerfil;
     
     Perfil(int codigoPerfil){
         this.codigoPerfil = codigoPerfil;

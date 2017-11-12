@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.CadastroUsuarioFXMLController">
+        <children>
+      <ImageView fitHeight="131.0" fitWidth="260.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imagens/KeroPreco.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="89.0" layoutY="127.0" prefHeight="25.0" prefWidth="149.0" text="Nome" />
+      <TextField fx:id="txtNome" layoutX="89.0" layoutY="151.0" prefHeight="25.0" prefWidth="149.0" promptText="luis.souza" />
+        <Label layoutX="90.0" layoutY="188.0" minHeight="16" minWidth="69" text="Login" />
+      <TextField fx:id="txtLogin" layoutX="90.0" layoutY="209.0" prefHeight="25.0" prefWidth="149.0" promptText="luis.souza@gmail.com" />
+      <Label layoutX="89.0" layoutY="250.0" text="Senha" />
+      <PasswordField fx:id="txtSenha" layoutX="89.0" layoutY="271.0" prefHeight="25.0" prefWidth="149.0" promptText="*************" />
+      <Label layoutX="89.0" layoutY="309.0" text="Confirme a senha" />
+      <PasswordField fx:id="txtConfSenha" layoutX="89.0" layoutY="329.0" promptText="*************" />
+        <Button layoutX="15.0" layoutY="384.0" onAction="#irParaLogin" prefHeight="25.0" prefWidth="93.0" text="Voltar" />
+      <Button layoutX="220.0" layoutY="384.0" mnemonicParsing="false" onAction="#efetuarCadastro" prefHeight="25.0" prefWidth="93.0" text="Cadastre-se" />
+    </children>
+</AnchorPane>

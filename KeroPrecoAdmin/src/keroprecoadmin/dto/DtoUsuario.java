@@ -14,7 +14,7 @@ import keroprecoadmin.Perfil;
 public class DtoUsuario {
     
     private int idUsuario;
-    private Perfil perfil = Perfil.ADMINISTRADOR;
+    private Perfil perfil;
     private String nome;
     private String login;
     private String usuario;

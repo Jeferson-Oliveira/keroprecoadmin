@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import keroprecoadmin.AplicacaoUtil;
+import keroprecoadmin.Perfil;
 import keroprecoadmin.dto.DtoUsuario;
 
 /**
@@ -19,11 +20,11 @@ import keroprecoadmin.dto.DtoUsuario;
  */
 public class UsuarioDAO extends DAO {
     
-    public boolean existe(DtoUsuario usuario){
+    public DtoUsuario existe(DtoUsuario usuario){
         
         boolean existe = false;
         // Fazer Conexão com o banco de dados e verificar a existencia do registro na base
-        String sql = "SELECT nome,login FROM " + super.getNomeSchemma() + "usuarios WHERE login = ? and senha = ?";
+        String sql = "SELECT nome,login,perfil FROM " + super.getNomeSchemma() + "usuarios WHERE login = ? and senha = ?";
         DtoUsuario retorno = null;
         
         try {
@@ -35,6 +36,11 @@ public class UsuarioDAO extends DAO {
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
               retorno = new DtoUsuario(rs.getString("nome"),rs.getString("login"),"");
+              if(rs.getInt("perfil") == Perfil.ADMINISTRADOR.getCodigoPerfil()){
+               retorno.setPerfil(Perfil.ADMINISTRADOR);
+             }else{
+               retorno.setPerfil(Perfil.USUARIO);
+             }
             }
             rs.close();
             super.destroyConnection();
@@ -47,14 +53,14 @@ public class UsuarioDAO extends DAO {
             AplicacaoUtil.getInstancia().setUsuarioLogado(retorno);
             existe = true;
         }
-        return existe;
+        return retorno;
     }
     
     public boolean existeUserName(DtoUsuario usuario){
         
         boolean existe = false;
         // Fazer Conexão com o banco de dados e verificar a existencia do registro na base
-        String sql = "SELECT login,nome FROM " + super.getNomeSchemma() + "usuarios WHERE login = ?";
+        String sql = "SELECT login,nome,perfil FROM " + super.getNomeSchemma() + "usuarios WHERE login = ?";
         DtoUsuario retorno = null;
         
         try {
@@ -66,6 +72,12 @@ public class UsuarioDAO extends DAO {
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
               retorno = new DtoUsuario(rs.getString("nome"),rs.getString("login"),"");
+              if(rs.getInt("perfil") == Perfil.ADMINISTRADOR.getCodigoPerfil()){
+               retorno.setPerfil(Perfil.ADMINISTRADOR);
+             }else{
+               retorno.setPerfil(Perfil.USUARIO);
+             }
+              usuario = retorno;
             }
             rs.close();
             super.destroyConnection();
@@ -84,13 +96,14 @@ public class UsuarioDAO extends DAO {
     public boolean inserir(DtoUsuario novoUsuario){
           boolean inseriuComSucesso = false;
           
-          String sql = "INSERT INTO " + super.getNomeSchemma()+"usuarios (nome,login,senha) VALUES(?,?,?)";
+          String sql = "INSERT INTO " + super.getNomeSchemma()+"usuarios (nome,login,senha,perfil) VALUES(?,?,?,?)";
            
             try {
                 PreparedStatement ps = super.getPreparedStatement(sql);
                 ps.setString(1,novoUsuario.getNome());
                 ps.setString(2, novoUsuario.getLogin());
                 ps.setString(3, novoUsuario.getSenha());
+                ps.setInt(4, novoUsuario.getPerfil().getCodigoPerfil());
                 
                 ps.executeUpdate();
                 

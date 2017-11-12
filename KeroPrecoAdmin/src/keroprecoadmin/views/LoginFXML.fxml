@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="327.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="keroprecoadmin.controllers.LoginFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.LoginFXMLController">
     <children>
       <ImageView fitHeight="131.0" fitWidth="260.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,5 +19,6 @@
       <Label layoutX="89.0" layoutY="201.0" text="Senha" />
       <PasswordField fx:id="txSenha" layoutX="89.0" layoutY="231.0" promptText="*************" />
         <Button layoutX="89.0" layoutY="278.0" onAction="#efetuarLogin" prefHeight="25.0" prefWidth="149.0" text="Login" />
+      <Button layoutX="89.0" layoutY="321.0" mnemonicParsing="false" onAction="#irParaCadastroUsuario" prefHeight="25.0" prefWidth="149.0" text="Cadastre-se" />
     </children>
 </AnchorPane>
