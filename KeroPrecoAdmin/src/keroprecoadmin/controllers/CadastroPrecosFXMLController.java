@@ -2,7 +2,10 @@
 package keroprecoadmin.controllers;
 
 import java.net.URL;
-import java.util.Observable;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,11 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
 import keroprecoadmin.AplicacaoUtil;
 import keroprecoadmin.controllers.abstrato.Controller;
@@ -45,6 +48,9 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
 
     @FXML
     private TextField txPreco;
+    
+    @FXML
+    private DatePicker dtValidade;
 
     
     @FXML
@@ -64,7 +70,17 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
         String tx = txPreco.getText();
         tx = tx.replace(',',   '.');
        
-        if(cbSupermercados.getValue() != null && cbProdutos.getValue() != null && precoDigitadoValido(tx)) {
+        LocalDate localDate = dtValidade.getValue();
+        
+        if(localDate == null){
+            AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Por favor preencha os campos corretamente.");
+            return;
+        }
+        
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date validade = Date.from(instant);
+        
+        if(cbSupermercados.getValue() != null && cbProdutos.getValue() != null && precoDigitadoValido(tx) && dataValida(validade)) {
         
             DtoSupermercado supermercadoSelecionado = cbSupermercados.getValue();
             DtoProduto produtoSelecionado = cbProdutos.getValue();
@@ -74,12 +90,28 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
             if(existeProdutoNoSupermercado(produtoSelecionado)){
                 AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Este Produto já foi cadastrado para o supermercado selecionado.");
             }else {
-                DtoProdutoSupermercado novoPreco = new DtoProdutoSupermercado(produtoSelecionado, supermercadoSelecionado, preco);
+                DtoProdutoSupermercado novoPreco = new DtoProdutoSupermercado(produtoSelecionado, supermercadoSelecionado, preco , validade);
                 if(produtoSupermercadoDAO.inserir(novoPreco)){
                     carregarProdutosSupermercado(null);
                 }
             }
+        }else {
+            AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.INFORMATION, "Por favor preencha os campos corretamente.");
         }
+    }
+    
+    private boolean dataValida(Date validade){
+        
+        Date hoje = new Date();
+        
+        if(validade != null){
+            if(validade.before(hoje)){
+                return false;
+            }
+        }else {
+            return false;
+        }   
+        return true;
     }
     
     private boolean precoDigitadoValido(String preco){
@@ -167,7 +199,12 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
             }
             
         });
-        tbProdutosSupermercados.getColumns().addAll(colunaNome , colunaPreco);
+        
+        TableColumn<DtoProdutoSupermercado , String > colunaValidade = new TableColumn("Válido até");
+        colunaValidade.setMinWidth(100);
+        colunaValidade.setCellValueFactory(new PropertyValueFactory<>("dataValidadeFormatada"));
+    
+        tbProdutosSupermercados.getColumns().addAll(colunaNome , colunaPreco , colunaValidade);
     }
    
     

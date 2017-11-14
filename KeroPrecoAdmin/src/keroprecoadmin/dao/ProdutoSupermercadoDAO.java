@@ -4,19 +4,19 @@ package keroprecoadmin.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import keroprecoadmin.dto.DtoProduto;
 import keroprecoadmin.dto.DtoProdutoSupermercado;
 import keroprecoadmin.dto.DtoSupermercado;
-import keroprecoadmin.dto.DtoUsuario;
 
 public class ProdutoSupermercadoDAO extends DAO{
     
    public List<DtoProdutoSupermercado> listarProdutos(DtoSupermercado supermercado){
        
        List<DtoProdutoSupermercado> listaRetorno = new LinkedList<DtoProdutoSupermercado>();
-       String sql = "SELECT idprodutosupermercado ,idproduto ,nome, categoria ,preco" +
+       String sql = "SELECT idprodutosupermercado ,idproduto ,nome, categoria ,preco, validade_preco" +
        " FROM "+ super.getNomeSchemma() +"\"produtosSupermercado\" as tbps inner join " + 
         super.getNomeSchemma() +"produtos as tbp on tbp.idproduto = tbps.fkidproduto where tbps.fkidsupermercado = ?;";
         
@@ -29,7 +29,11 @@ public class ProdutoSupermercadoDAO extends DAO{
             
             while (rs.next()){
                 DtoProduto produto = new DtoProduto(rs.getInt("idproduto"), rs.getString("nome"), rs.getString("categoria"));
-                listaRetorno.add(new DtoProdutoSupermercado(rs.getInt("idprodutosupermercado"), produto, supermercado, rs.getDouble("preco")));
+                Date validade = new Date(); 
+                if(rs.getDate("validade_preco") != null){
+                    validade = new Date(rs.getDate("validade_preco").getTime());
+                }
+                listaRetorno.add(new DtoProdutoSupermercado(rs.getInt("idprodutosupermercado"), produto, supermercado, rs.getDouble("preco") , validade));
             }
             rs.close();
             super.destroyConnection();
@@ -44,13 +48,14 @@ public class ProdutoSupermercadoDAO extends DAO{
           boolean inseriuComSucesso = false;
           
 
-        String sql = "INSERT INTO "+ super.getNomeSchemma() +"\"produtosSupermercado\"(fkidproduto, fkidsupermercado, preco) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO "+ super.getNomeSchemma() +"\"produtosSupermercado\"(fkidproduto, fkidsupermercado, preco , validade_preco) VALUES (?, ?, ? , ?)";
          
             try {
                 PreparedStatement ps = super.getPreparedStatement(sql);
                 ps.setInt(1,novoPreco.getProduto().getIdProduto());
                 ps.setInt(2, novoPreco.getSupermercado().getIdSupermercado());
                 ps.setDouble(3, novoPreco.getPreco());
+                ps.setDate(4, new java.sql.Date(novoPreco.getDataValidade().getTime()));
                 
                 inseriuComSucesso = ps.executeUpdate()>0;
                 

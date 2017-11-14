@@ -1,7 +1,8 @@
 
 package keroprecoadmin.dto;
 
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class DtoProdutoSupermercado {
@@ -10,25 +11,25 @@ public class DtoProdutoSupermercado {
     private DtoProduto produto;
     private DtoSupermercado supermercado;
     private double preco;
+    private Date dataValidade = new Date();
 
     //Construtores
     public DtoProdutoSupermercado() {
     
     }
 
-    public DtoProdutoSupermercado(DtoProduto produto, DtoSupermercado supermercado, double preco) {
+    public DtoProdutoSupermercado(DtoProduto produto, DtoSupermercado supermercado, double preco , Date validade) {
         this.produto = produto;
         this.supermercado = supermercado;
         this.preco = preco;
+        this.dataValidade = validade;
     }
     
-    public DtoProdutoSupermercado(int idProdutoSupermercado, DtoProduto produto, DtoSupermercado supermercado, double preco) {
-        this(produto , supermercado , preco);
+    public DtoProdutoSupermercado(int idProdutoSupermercado, DtoProduto produto, DtoSupermercado supermercado, double preco , Date validade) {
+        this(produto , supermercado , preco , validade);
         this.idProdutoSupermercado = idProdutoSupermercado;
     }
 
-
-    
     //Metodos
     
     public void setIdProdutoSupermercado(int idProdutoSupermercado) {
@@ -66,5 +67,20 @@ public class DtoProdutoSupermercado {
     public String getNomeProduto(){
         return this.produto.getNome();
     }
+
+    public void setDataValidade(Date dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+
+    public Date getDataValidade() {
+        return dataValidade;
+    }
+    
+    public String getDataValidadeFormatada() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = dateFormat.format(dataValidade);
+        return dataFormatada;
+    }
+    
 
 }

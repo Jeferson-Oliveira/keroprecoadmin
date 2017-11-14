@@ -42,7 +42,7 @@
       <ComboBox fx:id="cbSupermercados" layoutX="14.0" layoutY="96.0" onAction="#carregarProdutosSupermercado" prefHeight="25.0" prefWidth="225.0" promptText="Supermercado" />
       <ComboBox fx:id="cbProdutos" layoutX="14.0" layoutY="140.0" prefHeight="25.0" prefWidth="225.0" promptText="Produtos" />
       <TextField fx:id="txPreco" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="88.0" promptText="Preço" />
-      <Button layoutX="161.0" layoutY="188.0" mnemonicParsing="false" onAction="#cadastrarPreco" prefHeight="25.0" prefWidth="79.0" text="Adicionar" />
+      <Button layoutX="160.0" layoutY="330.0" mnemonicParsing="false" onAction="#cadastrarPreco" prefHeight="25.0" prefWidth="79.0" text="Adicionar" />
       <Button layoutX="524.0" layoutY="361.0" mnemonicParsing="false" onAction="#removerPreco" text="Remover" />
       <TableView fx:id="tbProdutosSupermercados" layoutX="310.0" layoutY="51.0" prefHeight="304.0" prefWidth="292.0" />
       <Label layoutY="51.0" prefHeight="35.0" prefWidth="311.0" text="Cadastro de Preços">
@@ -53,5 +53,6 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
+      <DatePicker fx:id="dtValidade" layoutX="109.0" layoutY="188.0" prefHeight="25.0" prefWidth="129.0" promptText="Validade" />
     </children>
 </AnchorPane>
