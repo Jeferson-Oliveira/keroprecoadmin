@@ -43,6 +43,53 @@ public class ProdutoSupermercadoDAO extends DAO{
        
         return listaRetorno;
    }
+   
+   public List<DtoProdutoSupermercado> listarPrecosPorPeriodo(Date dataInicio , Date dataFim){
+       
+       String sql = "SELECT idprodutosupermercado ,tbp.idproduto , tbp.nome as nomeproduto ,tbp.categoria, tbps.preco, tbps.validade_preco , tbs.nome as nomesupermercado , tbs.localizacao as localizacaosupermercado , tbs.idsupermercado "
+               + " FROM " + this.getNomeSchemma()+ "\"produtosSupermercado\" as tbps inner join " + this.getNomeSchemma()+ "produtos as tbp on tbp.idproduto = tbps.fkidproduto "
+               + " inner join " + this.getNomeSchemma() + "supermercados as tbs on tbs.idsupermercado = tbps.fkidsupermercado "
+               + " WHERE tbps.validade_preco >= ? and tbps.validade_preco <= ?";      
+       
+       
+       List<DtoProdutoSupermercado> listaRetorno = new LinkedList<DtoProdutoSupermercado>();
+     
+       try {
+            
+            PreparedStatement pst = super.getPreparedStatement(sql);
+            pst.setDate(1,new java.sql.Date(dataInicio.getTime()));
+            pst.setDate(2, new java.sql.Date(dataFim.getTime()));
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()){
+                
+                DtoProduto produto = new DtoProduto();
+                produto.setIdProduto(rs.getInt("idproduto"));
+                produto.setNome(rs.getString("nomeproduto"));
+                produto.setCategoria(rs.getString("categoria"));
+             
+                DtoSupermercado supermrecado = new DtoSupermercado();
+                supermrecado.setIdSupermercado(rs.getInt("idsupermercado"));
+                supermrecado.setNome(rs.getString("nomesupermercado"));
+                supermrecado.setLocalizacao(rs.getString("localizacaosupermercado"));
+                
+                DtoProdutoSupermercado produtoSupermercado = new DtoProdutoSupermercado();
+                produtoSupermercado.setProduto(produto);
+                produtoSupermercado.setSupermercado(supermrecado);
+                produtoSupermercado.setPreco(rs.getDouble("preco"));
+                produtoSupermercado.setDataValidade(new java.util.Date(rs.getDate("validade_preco").getTime()));
+                
+                listaRetorno.add(produtoSupermercado);
+            }
+            rs.close();
+            super.destroyConnection();
+        } catch (SQLException e) {
+            System.out.println("Erro de Consulta: " + e.getMessage());
+        }
+       
+        return listaRetorno;
+   }
     
    public boolean inserir(DtoProdutoSupermercado novoPreco){
           boolean inseriuComSucesso = false;
