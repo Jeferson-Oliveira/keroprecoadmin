@@ -8,16 +8,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="348.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.ListaPrecosFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="keroprecoadmin.controllers.ListaPrecosFXMLController">
    <children>
       <VBox layoutX="55.0" layoutY="62.0" prefHeight="421.0" prefWidth="214.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="35.0" prefWidth="353.0" text="Preços ">
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="581.0" text="Preços da Semana" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView prefHeight="423.0" prefWidth="348.0" />
+            <Label fx:id="lblNomeUsuario" prefHeight="17.0" prefWidth="581.0" />
+            <TableView fx:id="tbPrecos" prefHeight="423.0" prefWidth="348.0" />
             <Button mnemonicParsing="false" onAction="#irParaLogin" text="Sair" />
          </children>
          <padding>

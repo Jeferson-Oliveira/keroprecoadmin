@@ -81,6 +81,10 @@ public class DtoProdutoSupermercado {
         String dataFormatada = dateFormat.format(dataValidade);
         return dataFormatada;
     }
-    
-
+    public String getNomeSupermercado(){
+        return this.supermercado.getNome();
+    }
+    public String getLocalizacaoSupermercado(){
+        return this.supermercado.getLocalizacao();
+    }
 }
