@@ -6,6 +6,7 @@
 package keroprecoadmin;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -15,7 +16,9 @@ import javafx.stage.Stage;
 public class KeroPrecoAdmin extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {       
+    public void start(Stage stage) throws Exception {
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("icoKP3.png")));
+        //stage.getIcons().add(new Image("file:icoKP3.png"));
         AplicacaoUtil.getInstancia().setTelaAtual(stage);
         AplicacaoUtil.getInstancia().irParaTela("LoginFXML.fxml");
     }
