@@ -17,6 +17,7 @@ public class KeroPrecoAdmin extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setTitle("KeroPreço");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("icoKP3.png")));
         //stage.getIcons().add(new Image("file:icoKP3.png"));
         AplicacaoUtil.getInstancia().setTelaAtual(stage);
