@@ -47,6 +47,7 @@ public class CadastroUsuarioFXMLController extends Controller implements Initial
             novoUsuario.setPerfil(Perfil.USUARIO);
             
             if(usuarioDAO.inserir(novoUsuario)){
+                AplicacaoUtil.getInstancia().setUsuarioLogado(novoUsuario);
                 irParaListarPrecos(event);
             }else{
                 AplicacaoUtil.getInstancia().adicionarMensagemSimples(Alert.AlertType.ERROR, "Não foi possível efetuar o cadastro");

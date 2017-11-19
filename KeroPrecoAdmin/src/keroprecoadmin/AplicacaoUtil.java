@@ -51,7 +51,7 @@ public class AplicacaoUtil {
                 this.telaAtual.show();
             }
         }catch(Exception e){
-            System.err.println("Ocorreu um erro ao tentar navegar para tela: ".concat(nomeTela));
+            System.err.println("Ocorreu um erro ao tentar navegar para tela: ".concat(nomeTela).concat(" ".concat(e.getMessage())));
            // e.printStackTrace();
         }
     }
