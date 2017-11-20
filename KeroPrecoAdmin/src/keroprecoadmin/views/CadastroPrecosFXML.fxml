@@ -53,6 +53,6 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <DatePicker fx:id="dtValidade" layoutX="109.0" layoutY="188.0" prefHeight="25.0" prefWidth="129.0" promptText="Validade" />
+      <DatePicker fx:id="dtValidade" layoutX="109.0" layoutY="188.0" prefHeight="25.0" prefWidth="129.0" promptText="Vigente até" />
     </children>
 </AnchorPane>

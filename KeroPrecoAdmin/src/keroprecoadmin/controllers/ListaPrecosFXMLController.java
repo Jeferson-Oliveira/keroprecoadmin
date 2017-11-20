@@ -70,7 +70,7 @@ public class ListaPrecosFXMLController extends Controller implements Initializab
         colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
         
         
-        TableColumn<DtoProdutoSupermercado , String > colunaValidade = new TableColumn("Validade");
+        TableColumn<DtoProdutoSupermercado , String > colunaValidade = new TableColumn("Vigente até");
         colunaValidade.setMinWidth(100);
         colunaValidade.setCellValueFactory(new PropertyValueFactory<>("dataValidadeFormatada"));
         colunaValidade.setCellFactory(TextFieldTableCell.forTableColumn());

@@ -200,7 +200,7 @@ public class CadastroPrecosFXMLController extends Controller implements  Initial
             
         });
         
-        TableColumn<DtoProdutoSupermercado , String > colunaValidade = new TableColumn("Válido até");
+        TableColumn<DtoProdutoSupermercado , String > colunaValidade = new TableColumn("Vigente até");
         colunaValidade.setMinWidth(100);
         colunaValidade.setCellValueFactory(new PropertyValueFactory<>("dataValidadeFormatada"));
     
